@@ -1,0 +1,25 @@
+.container {
+    padding: 63px 76px 63px 89px;
+
+    position: relative;
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+        font-family: 'FiraGO', sans-serif;
+        font-weight: 700;
+        font-size: 64px;
+        color: #1A1A1F;
+    }
+
+    .img-container {
+        width: 624px;
+        height: 200px;
+        background-image: url('../../assets/images/banner-img.png');
+        background-repeat: no-repeat;
+    }
+}
