@@ -1,0 +1,31 @@
+div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 76px;
+
+    width: 100%;
+    height: 80px;
+
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid #E4E3EB;
+
+    .img-container {
+        width: 150px;
+        height: 24px;
+        background-image: url('../../assets/images/logo.png');
+        background-repeat: no-repeat;
+        box-shadow: none;
+        border: none;
+    }
+
+    button {
+        width: 93px;
+        height: 40px;
+        font-size: 14px;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        border: none;
+    }
+}
