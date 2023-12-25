@@ -7,12 +7,14 @@ import { TopbarComponent } from './topbar/topbar.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { BannerComponent } from './banner/banner.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopbarComponent,
-    BannerComponent
+    BannerComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
