@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, Subject, map } from 'rxjs';
 import { Category, CategoryRes } from '../interfaces/category';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriesService {
+
+  private selectedCategories = new Subject<string[]>;
+  selectedCategories$ = this.selectedCategories.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -17,6 +20,12 @@ export class CategoriesService {
         map(response => response.data)
       )
 
+  }
+
+
+  updatedSelectedCategories(categories: any) {
+    console.log('updated' + categories)
+    this.selectedCategories.next(categories);
   }
 }
 

@@ -8,13 +8,15 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { BannerComponent } from './banner/banner.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopbarComponent,
     BannerComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

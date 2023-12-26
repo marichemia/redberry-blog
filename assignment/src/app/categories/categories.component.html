@@ -1,7 +1,7 @@
 <nav>
     <ul>
         <li *ngFor="let category of categoriesArr$ | async">
-            <button [style.backgroundColor]="category.background_color"
+            <button (click)="onCategoryClick(category.title)" [style.backgroundColor]="category.background_color"
                 [style.color]="category.text_color">{{category.title}}</button>
         </li>
     </ul>
