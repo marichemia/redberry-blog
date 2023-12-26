@@ -9,20 +9,19 @@ import { CategoriesService } from '../core/services/categories.service';
 })
 export class HomeComponent implements OnInit {
 
+  categories: string[] = [];
+
   selectedCategries: any;
   constructor(private route: ActivatedRoute, private categoriesService: CategoriesService) { }
 
   ngOnInit() {
-
-    this.selectedCategries = JSON.parse(localStorage.getItem('categories')!);
-
-    //this.categoriesService.updatedSelectedCategories(this.selectedCategries);
-
-    this.categoriesService.selectedCategories$.subscribe(categories => {
-      console.log(categories);
-      localStorage.setItem('categories', JSON.stringify(categories));
-    })
-
+    this.route.queryParams.subscribe(params => {
+      if (params['categories']) {
+        this.categories = params['categories'].split(',');
+      } else {
+        this.categories = [];
+      }
+    });
   }
 
 }
