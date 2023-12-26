@@ -1,27 +1,7 @@
 <nav>
     <ul>
-        <li>
-            <button>მარკეტი</button>
-        </li>
-
-        <li>
-            <button>აპლიკაცია</button>
-        </li>
-
-        <li>
-            <button>ხელოვნური ინტელექტი</button>
-        </li>
-
-        <li>
-            <button>UI/UX</button>
-        </li>
-
-        <li>
-            <button>კვლევა</button>
-        </li>
-
-        <li>
-            <button>Figma</button>
+        <li *ngFor="let category of categoriesArr$ | async">
+            <button>{{category.title}}</button>
         </li>
     </ul>
 </nav>
