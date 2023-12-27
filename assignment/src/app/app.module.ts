@@ -9,6 +9,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { BannerComponent } from './banner/banner.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { HomeComponent } from './home/home.component';
+import { CreateBlogComponent } from './create-blog/create-blog.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HomeComponent } from './home/home.component';
     TopbarComponent,
     BannerComponent,
     CategoriesComponent,
-    HomeComponent
+    HomeComponent,
+    CreateBlogComponent
   ],
   imports: [
     BrowserModule,

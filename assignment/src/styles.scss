@@ -1,5 +1,6 @@
 @import url('https://free.bboxtype.com/embedfonts/?family=FiraGO:400,500,700');
 
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -8,7 +9,8 @@
 body {
     position: relative;
     top: 0;
-    background-color: #F3F2FA;
+    background-color: #FBFAFF;
+    font-family: 'FiraGo', sans-serif;
 }
 
 button {
