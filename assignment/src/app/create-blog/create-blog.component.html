@@ -1,5 +1,5 @@
 <div class="container">
-    <form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <h1>ბლოგის დამატება</h1>
         <h6>ატვირთეთ ფოტო</h6>
         <div class="upload-img" *ngIf="!fileName">
@@ -19,22 +19,24 @@
             <div class="single-input">
                 <label for="author">ავტორი *</label>
                 <br>
-                <input type="text" id="author" placeholder="შეიყვანეთ ავტორი">
-                <p class="hint">• მინიმუმ 4 სიმბოლო</p>
+                <input type="text" id="author" placeholder="შეიყვანეთ ავტორი" formControlName="author">
+                <p class="hint" [ngClass]="{ 'valid-hint': !form.get('author')!.hasError('minlength') && form.get('author')!.touched,
+                'invalid-hint': form.get('author')!.hasError('minlength') && form.get('author')!.touched }">• მინიმუმ 4
+                    სიმბოლო</p>
                 <p class="hint">• მინიმუმ ორი სიტყვა</p>
                 <p class="hint">• მხოლოდ ქართული სიმბოლოები</p>
             </div>
             <div class="single-input">
                 <label for="title">სათაური *</label>
                 <br>
-                <input type="text" id="title" placeholder="შეიყვანეთ სათაური">
+                <input type="text" id="title" placeholder="შეიყვანეთ სათაური" formControlName="title">
                 <p class="hint">მინიმუმ 2 სიმბოლო</p>
             </div>
         </div>
         <div class="single-input">
             <label for="description">აღწერა *</label>
             <br>
-            <textarea id="description" placeholder="შეიყვანეთ აღწერა"></textarea>
+            <textarea id="description" placeholder="შეიყვანეთ აღწერა" formControlName="description"></textarea>
             <p class="hint">მინიმუმ 2 სიმბოლო</p>
         </div>
         <div class="two-input-line">
@@ -42,12 +44,12 @@
                 <img src="../../assets/images/calendar.png" alt="calendar">
                 <label for="date">გამოქვეყნების თარიღი *</label>
                 <br>
-                <input type="date" id="date">
+                <input type="date" id="date" formControlName="date">
             </div>
             <div class="single-input">
                 <label for="category">კატეგორია *</label>
                 <br>
-                <select id="category" name="category">
+                <select id="category" name="category" formControlName="category" multiple>
                     <option value="" disabled selected>აირჩიეთ კატეგორია</option>
                     <option *ngFor="let category of categoriesArr$ | async" [value]="category.id">
                         {{ category.title }}
@@ -59,7 +61,7 @@
         <div class="single-input">
             <label for="email">ელ-ფოსტა</label>
             <br>
-            <input type="email" placeholder="Example@redberry.ge">
+            <input type="email" placeholder="Example@redberry.ge" formControlName="email">
         </div>
 
         <button type="submit" disabled>გამოქვეყნება</button>

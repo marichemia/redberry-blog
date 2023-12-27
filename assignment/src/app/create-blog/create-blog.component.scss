@@ -165,7 +165,13 @@
                 left: 7px;
             }
 
+            .valid-hint {
+                color: #14D81C;
+            }
 
+            .invalid-hint {
+                color: #EA1919;
+            }
 
 
         }
@@ -195,6 +201,7 @@
             height: 44px;
             margin-top: 20px;
             border-radius: 8px;
+            margin-bottom: 110px;
 
 
             &:disabled {
