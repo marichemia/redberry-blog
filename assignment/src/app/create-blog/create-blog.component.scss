@@ -38,6 +38,7 @@
             align-items: center;
 
             padding-top: 50px;
+            margin-bottom: 24px;
 
             input[type=file] {
                 opacity: 0;
@@ -74,6 +75,9 @@
             padding-left: 18px;
             position: relative;
 
+
+            margin-bottom: 24px;
+
             img {
                 margin-right: 14px;
             }
@@ -96,6 +100,108 @@
             }
 
         }
+
+        .two-input-line {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .single-input {
+
+            margin-bottom: 24px;
+
+            label {
+                font-weight: 500;
+                font-size: 14px;
+                color: #1A1A1F;
+                margin-bottom: 8px;
+            }
+
+            input,
+            textarea,
+            select {
+                border-radius: 12px;
+                background-color: #FCFCFD;
+                border: 1px solid #E4E3EB;
+                padding-left: 16px;
+                margin-top: 8px;
+            }
+
+            textarea {
+                width: 100%;
+                height: 124px;
+                padding-top: 12px;
+
+                &::placeholder {
+                    font-family: 'FiraGo', sans-serif;
+                    font-size: 14px;
+                    line-height: 20px;
+                    color: #85858D;
+                }
+            }
+
+            input,
+            select {
+                width: 288px;
+                height: 44px;
+
+
+                &::placeholder {
+                    font-family: 'FiraGo', sans-serif;
+                    font-size: 14px;
+                    line-height: 20px;
+                    color: #85858D;
+                }
+
+            }
+
+            .hint {
+                font-size: 12px;
+                color: #85858D;
+                margin-top: 9px;
+                position: relative;
+                left: 7px;
+            }
+
+
+
+
+        }
+
+        .date-container input[type="date"]::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+
+        .date-container {
+            position: relative;
+
+            input {
+                padding-left: 50px;
+            }
+
+            img {
+                position: absolute;
+                top: 40px;
+                left: 16px;
+            }
+        }
+
+        button {
+            position: relative;
+            left: calc(100% - 288px);
+            width: 288px;
+            height: 44px;
+            margin-top: 20px;
+            border-radius: 8px;
+
+
+            &:disabled {
+                background-color: #E4E3EB;
+            }
+        }
+
 
 
     }

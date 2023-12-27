@@ -15,6 +15,54 @@
             <button (click)="onDelete()"><img src="../../assets/images/x.png" alt="x"></button>
         </div>
 
+        <div class="two-input-line">
+            <div class="single-input">
+                <label for="author">ავტორი *</label>
+                <br>
+                <input type="text" id="author" placeholder="შეიყვანეთ ავტორი">
+                <p class="hint">• მინიმუმ 4 სიმბოლო</p>
+                <p class="hint">• მინიმუმ ორი სიტყვა</p>
+                <p class="hint">• მხოლოდ ქართული სიმბოლოები</p>
+            </div>
+            <div class="single-input">
+                <label for="title">სათაური *</label>
+                <br>
+                <input type="text" id="title" placeholder="შეიყვანეთ სათაური">
+                <p class="hint">მინიმუმ 2 სიმბოლო</p>
+            </div>
+        </div>
+        <div class="single-input">
+            <label for="description">აღწერა *</label>
+            <br>
+            <textarea id="description" placeholder="შეიყვანეთ აღწერა"></textarea>
+            <p class="hint">მინიმუმ 2 სიმბოლო</p>
+        </div>
+        <div class="two-input-line">
+            <div class="single-input date-container">
+                <img src="../../assets/images/calendar.png" alt="calendar">
+                <label for="date">გამოქვეყნების თარიღი *</label>
+                <br>
+                <input type="date" id="date">
+            </div>
+            <div class="single-input">
+                <label for="category">კატეგორია *</label>
+                <br>
+                <select id="category" name="category">
+                    <option value="" disabled selected>აირჩიეთ კატეგორია</option>
+                    <option *ngFor="let category of categoriesArr$ | async" [value]="category.id">
+                        {{ category.title }}
+                    </option>
+                </select>
+
+            </div>
+        </div>
+        <div class="single-input">
+            <label for="email">ელ-ფოსტა</label>
+            <br>
+            <input type="email" placeholder="Example@redberry.ge">
+        </div>
+
+        <button type="submit" disabled>გამოქვეყნება</button>
     </form>
 
 
