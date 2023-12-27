@@ -23,8 +23,13 @@
                 <p class="hint" [ngClass]="{ 'valid-hint': !form.get('author')!.hasError('minlength') && form.get('author')!.touched,
                 'invalid-hint': form.get('author')!.hasError('minlength') && form.get('author')!.touched }">• მინიმუმ 4
                     სიმბოლო</p>
-                <p class="hint">• მინიმუმ ორი სიტყვა</p>
-                <p class="hint">• მხოლოდ ქართული სიმბოლოები</p>
+                <p class="hint" [ngClass]="{ 'valid-hint': !form.get('author')!.hasError('twoWordsValidation') && form.get('author')!.touched,
+                'invalid-hint': form.get('author')!.getError('twoWordsValidation') && form.get('author')!.touched }">•
+                    მინიმუმ ორი
+                    სიტყვა</p>
+                <p class="hint" [ngClass]="{ 'valid-hint': !form.get('author')!.hasError('pattern') && form.get('author')!.touched,
+                'invalid-hint': form.get('author')!.hasError('pattern') && form.get('author')!.touched }">• მხოლოდ
+                    ქართული სიმბოლოები</p>
             </div>
             <div class="single-input">
                 <label for="title">სათაური *</label>

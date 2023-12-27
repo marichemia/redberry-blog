@@ -51,7 +51,9 @@ export class CreateBlogComponent implements OnInit {
   twoWordsValidator(control: AbstractControl): ValidationErrors | null {
     const value: string = control.value;
     const words = value.split(/\s+/).filter(word => word.trim().length > 0);
+
     return words.length >= 2 ? null : { twoWordsValidation: true };
   }
+
 
 }
