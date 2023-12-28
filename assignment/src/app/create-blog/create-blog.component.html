@@ -20,15 +20,19 @@
                 <label for="author">ავტორი *</label>
                 <br>
                 <input type="text" id="author" placeholder="შეიყვანეთ ავტორი" formControlName="author">
-                <p class="hint" [ngClass]="{ 'valid-hint': !form.get('author')!.hasError('minlength') && form.get('author')!.touched,
-                'invalid-hint': form.get('author')!.hasError('minlength') && form.get('author')!.touched }">• მინიმუმ 4
+                <p class="hint"
+                    [ngClass]="{ 'valid-hint': !form.get('author')!.hasError('minlength') && form.get('author')!.touched,
+                'invalid-hint': (form.get('author')!.hasError('minlength') && form.get('author')!.touched) || (form.get('author')?.hasError('required') && form.get('author')?.touched)}">
+                    • მინიმუმ 4
                     სიმბოლო</p>
                 <p class="hint" [ngClass]="{ 'valid-hint': !form.get('author')!.hasError('twoWordsValidation') && form.get('author')!.touched,
                 'invalid-hint': form.get('author')!.getError('twoWordsValidation') && form.get('author')!.touched }">•
                     მინიმუმ ორი
                     სიტყვა</p>
-                <p class="hint" [ngClass]="{ 'valid-hint': !form.get('author')!.hasError('pattern') && form.get('author')!.touched,
-                'invalid-hint': form.get('author')!.hasError('pattern') && form.get('author')!.touched }">• მხოლოდ
+                <p class="hint"
+                    [ngClass]="{ 'valid-hint': !form.get('author')!.hasError('pattern') && form.get('author')!.touched,
+                'invalid-hint':(form.get('author')!.hasError('pattern') && form.get('author')!.touched) || (form.get('author')?.hasError('required') && form.get('author')?.touched)}">
+                    • მხოლოდ
                     ქართული სიმბოლოები</p>
             </div>
             <div class="single-input">
