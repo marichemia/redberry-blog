@@ -52,14 +52,27 @@
                 <input type="date" id="date" formControlName="date">
             </div>
             <div class="single-input">
-                <label for="category">კატეგორია *</label>
-                <br>
-                <select id="category" name="category" formControlName="category" multiple>
-                    <option value="" disabled selected>აირჩიეთ კატეგორია</option>
-                    <option *ngFor="let category of categoriesArr$ | async" [value]="category.id">
-                        {{ category.title }}
-                    </option>
-                </select>
+                <div class="select-container">
+                    <label for="category">კატეგორია *</label>
+                    <br>
+                    <div class="selected-items">
+                        <div class="selected-item" *ngFor="let selectedOption of selectedOptions"
+                            [style.background-color]="selectedOption.background_color"
+                            [style.color]="selectedOption.text_color">
+                            {{selectedOption.title}}
+                            <button class="remove-category" (click)="removeOption(selectedOption)">x</button>
+                        </div>
+                    </div>
+
+                    <select formControlName="categories" (change)="onSelectionChange($event)">
+                        <option value="" disabled selected *ngIf="selectedOptions.length === 0">აირჩიეთ კატეგორია
+                        </option>
+                        <option *ngFor="let category of categoriesArr$ | async" [value]="category | json">
+                            {{ category.title }}
+                        </option>
+                    </select>
+
+                </div>
 
             </div>
         </div>

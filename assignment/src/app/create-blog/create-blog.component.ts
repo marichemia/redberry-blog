@@ -14,6 +14,9 @@ export class CreateBlogComponent implements OnInit {
   selectedFile: File | null | undefined;
   fileName: string | null | undefined;
   categoriesArr$: Observable<Category[]> | undefined;
+  categoriesArr: String[] | undefined;
+  selectedOptions: Category[] = [];
+  selectedValue: Category | undefined | null;
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
 
   constructor(private categoriesService: CategoriesService, private fb: FormBuilder) { }
@@ -23,13 +26,14 @@ export class CreateBlogComponent implements OnInit {
     title: ['', [Validators.required, Validators.minLength(2)]],
     description: ['', [Validators.required, Validators.minLength(2)]],
     date: [''],
-    category: [[], Validators.required],
+    categories: [[], Validators.required],
     email: ['']
   })
 
   ngOnInit() {
 
     this.categoriesArr$ = this.categoriesService.getCategories();
+
 
   }
 
@@ -42,6 +46,22 @@ export class CreateBlogComponent implements OnInit {
     this.selectedFile = null;
     this.fileName = null;
     this.fileInput!.nativeElement.value = null;
+  }
+
+  onSelectionChange(event: any) {
+
+    const selectedCategory = JSON.parse(event.target.value) as Category;
+    console.log(selectedCategory)
+    if (selectedCategory && !this.selectedOptions.includes(selectedCategory)) {
+      this.selectedOptions.push(selectedCategory);
+      console.log(this.selectedOptions)
+    }
+
+
+  }
+
+  removeOption(option: Category) {
+    this.selectedOptions = this.selectedOptions.filter(item => item !== option)
   }
 
   onSubmit() {
