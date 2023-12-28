@@ -1,11 +1,9 @@
-<div *ngIf="showModal" class="modal">
+<div class="modal" *ngIf="showModal">
     <div class="modal-content" [innerHTML]="modalContent.content">
-        <div class="modal-header">
-            <h2>{{ title }}</h2>
+        <div class="modal-body" #contentContainer>
+
+
         </div>
-        <div class="modal-body" #contentContainer></div>
-        <div class="modal-footer">
-            <button (click)="close()">Close</button>
-        </div>
+
     </div>
 </div>

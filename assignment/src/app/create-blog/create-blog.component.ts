@@ -47,7 +47,6 @@ export class CreateBlogComponent implements OnInit {
       this.modalContent = content;
     });
 
-
   }
 
   onFileSelected(event: any) {
@@ -93,7 +92,16 @@ export class CreateBlogComponent implements OnInit {
 
     this.createBlogService.createBlog(formData).subscribe(
       (data) => {
-        this.modalService.setContent({ title: 'title', content: '<p>Blog created successfully!</p>' });
+        this.modalService.setContent({
+          title: 'title', content: `<button class="close-btn" (click)="close()">
+        <img src="../../../../assets/images/x.png" alt="x">
+    </button>
+    <div class="success-message">
+        <img src="../../../../assets/images/tick-circle.png" alt="success">
+        <p>ბლოგი წარმატებით დაემატა</p>
+        <button routerLink="/home" class="return-home-btn">მთავარ გვერდზე დაბრუნება</button>
+    </div>` });
+
         this.modalService.openModal();
       },
       (error) => {
