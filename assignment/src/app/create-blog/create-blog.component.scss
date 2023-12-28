@@ -157,6 +157,22 @@
 
             }
 
+            .email-input {
+                margin-bottom: 10px;
+            }
+
+            .email-hint {
+                width: 288px;
+                color: #EA1919;
+                font-size: 12px;
+                display: flex;
+                flex-direction: row;
+
+                img {
+                    margin-right: 5px;
+                }
+            }
+
             .select-container {
 
                 position: relative;

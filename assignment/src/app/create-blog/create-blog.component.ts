@@ -27,7 +27,7 @@ export class CreateBlogComponent implements OnInit {
     description: ['', [Validators.required, Validators.minLength(2)]],
     date: [''],
     categories: [[], Validators.required],
-    email: ['']
+    email: ['', [this.customEmailValidator]]
   })
 
   ngOnInit() {
@@ -73,6 +73,16 @@ export class CreateBlogComponent implements OnInit {
     const words = value.split(/\s+/).filter(word => word.trim().length > 0);
 
     return words.length >= 2 ? null : { twoWordsValidation: true };
+  }
+
+  customEmailValidator(control: AbstractControl): ValidationErrors | null {
+    const email: string = control.value;
+
+    if (email && !email.endsWith('@redberry.ge')) {
+      return { invalidEmail: true };
+    }
+
+    return null;
   }
 
 

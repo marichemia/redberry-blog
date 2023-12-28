@@ -39,14 +39,20 @@
                 <label for="title">სათაური *</label>
                 <br>
                 <input type="text" id="title" placeholder="შეიყვანეთ სათაური" formControlName="title">
-                <p class="hint">მინიმუმ 2 სიმბოლო</p>
+                <p class="hint"
+                    [ngClass]="{ 'valid-hint': !form.get('title')!.hasError('minlength') && form.get('title')!.touched,
+                'invalid-hint': (form.get('title')!.hasError('minlength') && form.get('title')!.touched) || (form.get('title')?.hasError('required') && form.get('title')?.touched)}">
+                    მინიმუმ 2 სიმბოლო</p>
             </div>
         </div>
         <div class="single-input">
             <label for="description">აღწერა *</label>
             <br>
             <textarea id="description" placeholder="შეიყვანეთ აღწერა" formControlName="description"></textarea>
-            <p class="hint">მინიმუმ 2 სიმბოლო</p>
+            <p class="hint"
+                [ngClass]="{ 'valid-hint': !form.get('description')!.hasError('minlength') && form.get('description')!.touched,
+            'invalid-hint': (form.get('description')!.hasError('minlength') && form.get('description')!.touched) || (form.get('description')?.hasError('required') && form.get('description')?.touched)}">
+                მინიმუმ 2 სიმბოლო</p>
         </div>
         <div class="two-input-line">
             <div class="single-input date-container">
@@ -83,7 +89,11 @@
         <div class="single-input">
             <label for="email">ელ-ფოსტა</label>
             <br>
-            <input type="email" placeholder="Example@redberry.ge" formControlName="email">
+            <input type="email" placeholder="Example@redberry.ge" formControlName="email" class="email-input">
+            <div class="email-hint" *ngIf=" form.get('email')?.hasError('invalidEmail') && form.get('email')?.touched">
+                <img src="../../assets/images/info-circle.png" alt="hint" width="20" height="20">
+                <span>მეილი უნდა მთავრდებოდეს &#64;redberry.ge-ით</span>
+            </div>
         </div>
 
         <button type="submit" disabled>გამოქვეყნება</button>
