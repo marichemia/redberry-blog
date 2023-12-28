@@ -3,6 +3,7 @@ import { CategoriesService } from '../core/services/categories.service';
 import { Category } from '../core/interfaces/category';
 import { Observable } from 'rxjs';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { CreateBlogService } from '../core/services/create-blog.service';
 
 @Component({
   selector: 'app-create-blog',
@@ -11,7 +12,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators }
 })
 export class CreateBlogComponent implements OnInit {
 
-  selectedFile: File | null | undefined;
+  selectedFile: any;
   fileName: string | null | undefined;
   categoriesArr$: Observable<Category[]> | undefined;
   categoriesArr: String[] | undefined;
@@ -19,9 +20,10 @@ export class CreateBlogComponent implements OnInit {
   selectedValue: Category | undefined | null;
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
 
-  constructor(private categoriesService: CategoriesService, private fb: FormBuilder) { }
+  constructor(private categoriesService: CategoriesService, private fb: FormBuilder, private createBlogService: CreateBlogService) { }
 
   form: FormGroup = this.fb.group({
+    image: [null, Validators.required],
     author: ['', [Validators.required, Validators.minLength(4), Validators.pattern(/^[ა-ჰ\s]+$/), this.twoWordsValidator]],
     title: ['', [Validators.required, Validators.minLength(2)]],
     description: ['', [Validators.required, Validators.minLength(2)]],
@@ -51,10 +53,8 @@ export class CreateBlogComponent implements OnInit {
   onSelectionChange(event: any) {
 
     const selectedCategory = JSON.parse(event.target.value) as Category;
-    console.log(selectedCategory)
     if (selectedCategory && !this.selectedOptions.includes(selectedCategory)) {
       this.selectedOptions.push(selectedCategory);
-      console.log(this.selectedOptions)
     }
 
 
@@ -66,6 +66,39 @@ export class CreateBlogComponent implements OnInit {
 
   onSubmit() {
 
+    const categoryIds = this.selectedOptions.map(option => option.id);
+
+    const formData = new FormData();
+
+    formData.append('title', this.form.controls['title'].value);
+    formData.append('description', this.form.controls['description'].value);
+    formData.append('author', this.form.controls['author'].value);
+    formData.append('publish_date', this.form.controls['date'].value);
+    formData.append('image', this.selectedFile, this.selectedFile?.name);
+    formData.append('categories', JSON.stringify(categoryIds));
+    if (this.form.controls['email'].value) {
+      formData.append('email', this.form.controls['email'].value);
+    }
+
+    this.createBlogService.createBlog(formData).subscribe(data => console.log(data));
+
+    //form data for POST
+
+    /*const data = {
+      title: this.form.controls['title'].value,
+      description: this.form.controls['description'].value,
+      image: this.form.get('image')?.value,
+      author: this.form.controls['author'].value,
+      publish_date: this.form.controls['date'].value,
+      categories: categoryIds,
+      email: this.form.controls['email'].value
+    }
+    console.log('final data')
+    console.log(data)
+
+    //POST
+
+    this.createBlogService.createBlog(data).subscribe(data => console.log(data))*/
   }
 
   twoWordsValidator(control: AbstractControl): ValidationErrors | null {

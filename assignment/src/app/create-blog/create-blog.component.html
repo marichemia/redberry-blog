@@ -6,13 +6,14 @@
             <label>
                 <img src="../../assets/images/folder-add.png" alt="add image">
                 <p>ჩააგდეთ ფაილი აქ ან <span><a>აირჩიეთ ფაილი</a></span></p>
-                <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput>
+                <input formControlName="image" type="file" accept="image/*" (change)="onFileSelected($event)"
+                    #fileInput>
             </label>
         </div>
         <div class="file-name" *ngIf="fileName">
             <img src="../../assets/images/gallery.png" alt="image-icon">
             <p>{{fileName}}</p>
-            <button (click)="onDelete()"><img src="../../assets/images/x.png" alt="x"></button>
+            <button class="remove-img" (click)="onDelete()"><img src="../../assets/images/x.png" alt="x"></button>
         </div>
 
         <div class="two-input-line">
@@ -96,7 +97,7 @@
             </div>
         </div>
 
-        <button type="submit" disabled>გამოქვეყნება</button>
+        <button type="submit" [disabled]="form.invalid">გამოქვეყნება</button>
     </form>
 
 
