@@ -4,6 +4,7 @@ import { Category } from '../core/interfaces/category';
 import { Observable } from 'rxjs';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { CreateBlogService } from '../core/services/create-blog.service';
+import { ModalService } from '../shared/services/modal.service';
 
 @Component({
   selector: 'app-create-blog',
@@ -18,9 +19,11 @@ export class CreateBlogComponent implements OnInit {
   categoriesArr: String[] | undefined;
   selectedOptions: Category[] = [];
   selectedValue: Category | undefined | null;
+  showModal: boolean | undefined;
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
+  modalContent: { title: string; content: string; } | undefined;
 
-  constructor(private categoriesService: CategoriesService, private fb: FormBuilder, private createBlogService: CreateBlogService) { }
+  constructor(private categoriesService: CategoriesService, private fb: FormBuilder, private createBlogService: CreateBlogService, private modalService: ModalService) { }
 
   form: FormGroup = this.fb.group({
     image: [null, Validators.required],
@@ -35,6 +38,14 @@ export class CreateBlogComponent implements OnInit {
   ngOnInit() {
 
     this.categoriesArr$ = this.categoriesService.getCategories();
+
+    this.modalService.showModal$.subscribe((isOpen) => {
+      this.showModal = isOpen;
+    });
+
+    this.modalService.modalContent$.subscribe((content) => {
+      this.modalContent = content;
+    });
 
 
   }
@@ -80,7 +91,15 @@ export class CreateBlogComponent implements OnInit {
       formData.append('email', this.form.controls['email'].value);
     }
 
-    this.createBlogService.createBlog(formData).subscribe(data => console.log(data));
+    this.createBlogService.createBlog(formData).subscribe(
+      (data) => {
+        this.modalService.setContent({ title: 'title', content: '<p>Blog created successfully!</p>' });
+        this.modalService.openModal();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
     //form data for POST
 
