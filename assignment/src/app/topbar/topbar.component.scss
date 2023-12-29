@@ -1,4 +1,4 @@
-div {
+.container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -24,10 +24,13 @@ div {
     }
 
     button {
-        width: 93px;
+        width: auto;
+        padding: 0 15px;
         height: 40px;
         font-size: 14px;
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
         border: none;
     }
+
+
 }

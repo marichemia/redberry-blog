@@ -1,2 +1,25 @@
 <app-banner></app-banner>
 <app-categories></app-categories>
+<div class="modal-container" *ngIf="showModal">
+    <div class="modal">
+        <img src="../../assets/images/x.png" alt="x" (click)="closeModal()" class="close-btn">
+        <div class="signin-content" *ngIf="!showSuccess">
+            <h2>შესვლა</h2>
+            <label for="email">ელ-ფოსტა</label>
+            <form [formGroup]="form" (submit)="signIn()">
+                <input type="email" id="email" placeholder="Example@redberry.ge" formControlName="email">
+                <div class="hint" *ngIf="showHint">
+                    <img src="../../assets/images/info-circle.png" alt="hint">
+                    <span>ელ-ფოსტა არ მოიძებნა</span>
+                </div>
+                <button type="submit" [disabled]="!form.get('email')?.valid">შესვლა</button>
+            </form>
+        </div>
+        <div *ngIf="showSuccess" class="success">
+            <img src="../../assets/images/tick-circle.png" alt="success">
+            <p>წარმატებული ავტორიზაცია</p>
+            <button (click)="closeModal()">კარგი</button>
+        </div>
+
+    </div>
+</div>

@@ -1,5 +1,5 @@
-<div>
+<div class="container">
     <div class="img-container"></div>
-    <button>შესვლა</button>
-    <button routerLink="/create">დაამატე ბლოგი</button>
+    <button *ngIf="!isAuthenticated" (click)="openModal()">შესვლა</button>
+    <button routerLink="/create" *ngIf="isAuthenticated">დაამატე ბლოგი</button>
 </div>
