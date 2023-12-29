@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { AbstractControl, FormBuilder, FormControl, ValidationErrors, Validators } from '@angular/forms';
+import { BlogsService } from '../core/services/blogs.service';
+import { Blog } from '../core/interfaces/blog';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +16,13 @@ export class HomeComponent implements OnInit {
   showModal?: boolean;
   showHint: boolean = false;
   showSuccess: boolean = false;
+  allBlogs: Blog[] = [];
   form = this.fb.group({
     email: new FormControl('', [Validators.required, this.customEmailValidator])
   });
 
   selectedCategries: any;
-  constructor(private route: ActivatedRoute, private authService: AuthService, private fb: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private authService: AuthService, private fb: FormBuilder, private blogService: BlogsService) { }
 
   ngOnInit() {
 
@@ -32,6 +35,11 @@ export class HomeComponent implements OnInit {
         this.categories = [];
       }
     });
+
+    this.blogService.getAll().subscribe(data => {
+      this.allBlogs = data.data
+      console.log(this.allBlogs)
+    })
 
 
   }
