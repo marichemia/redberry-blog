@@ -30,12 +30,13 @@ export class HomeComponent implements OnInit {
     this.authService.getShowAuthModal().subscribe(bool => this.showModal = bool);
 
     this.route.queryParams.subscribe(params => {
+      console.log(params)
       if (params['categories']) {
         this.categories = params['categories'].split(',');
-        console.log('categories')
         this.allBlogs$ = this.blogService.getAll(this.categories);
       } else {
         this.categories = [];
+        this.allBlogs$ = this.blogService.getAll();
       }
 
 
