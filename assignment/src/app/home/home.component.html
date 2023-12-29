@@ -1,5 +1,31 @@
 <app-banner></app-banner>
 <app-categories></app-categories>
+<div class="container">
+    <div class="blogs-container">
+        <div class="blog-container" *ngFor="let blog of allBlogs$ | async">
+            <div class="img-container" [style.background-image]="'url(' + blog.image + ')'"></div>
+            <p class="author">{{blog.author}}</p>
+            <div class="date">{{blog.publish_date}}</div>
+            <h2 class="title">{{blog.title}}</h2>
+            <div class="categories">
+                <div class="category" *ngFor="let category of blog.categories"
+                    [style.background-color]="category.background_color" [style.color]="category.text_color">
+                    {{category.title}}
+                </div>
+            </div>
+            <div class="description">
+                {{blog.description}}
+            </div>
+            <div class="read-more-container">
+                <a>სრულად ნახვა</a>
+                <img src="../../assets/images/Arrow.png" alt="open">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="modal-container" *ngIf="showModal">
     <div class="modal">
         <img src="../../assets/images/x.png" alt="x" (click)="closeModal()" class="close-btn">

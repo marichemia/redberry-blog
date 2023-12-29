@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { AbstractControl, FormBuilder, FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { BlogsService } from '../core/services/blogs.service';
-import { Blog } from '../core/interfaces/blog';
+import { AllBlogsRes, Blog } from '../core/interfaces/blog';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   showModal?: boolean;
   showHint: boolean = false;
   showSuccess: boolean = false;
-  allBlogs: Blog[] = [];
+  allBlogs$!: Observable<Blog[]>;
   form = this.fb.group({
     email: new FormControl('', [Validators.required, this.customEmailValidator])
   });
@@ -36,10 +37,7 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.blogService.getAll().subscribe(data => {
-      this.allBlogs = data.data
-      console.log(this.allBlogs)
-    })
+    this.allBlogs$ = this.blogService.getAll();
 
 
   }
