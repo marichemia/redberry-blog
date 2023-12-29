@@ -1,9 +1,12 @@
 <div class="modal" *ngIf="showModal">
+    <img class="close-btn" (click)="close()" src="../../../../assets/images/x.png" alt="x">
     <div class="modal-content" [innerHTML]="modalContent.content">
         <div class="modal-body" #contentContainer>
 
 
         </div>
-
     </div>
+    <button class="return-home-btn" routerLink="/home">
+        მთავარ გვერდზე დაბრუნება
+    </button>
 </div>

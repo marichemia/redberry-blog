@@ -23,7 +23,7 @@ export class CreateBlogComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
   modalContent: { title: string; content: string; } | undefined;
 
-  constructor(private categoriesService: CategoriesService, private fb: FormBuilder, private createBlogService: CreateBlogService, private modalService: ModalService) { }
+  constructor(private categoriesService: CategoriesService, private fb: FormBuilder, private createBlogService: CreateBlogService, private modalService: ModalService,) { }
 
   form: FormGroup = this.fb.group({
     image: [null, Validators.required],
@@ -93,16 +93,18 @@ export class CreateBlogComponent implements OnInit {
     this.createBlogService.createBlog(formData).subscribe(
       (data) => {
         this.modalService.setContent({
-          title: 'title', content: `<button class="close-btn" (click)="close()">
-        <img src="../../../../assets/images/x.png" alt="x">
-    </button>
+          title: 'title', content: `
     <div class="success-message">
         <img src="../../../../assets/images/tick-circle.png" alt="success">
         <p>ბლოგი წარმატებით დაემატა</p>
-        <button routerLink="/home" class="return-home-btn">მთავარ გვერდზე დაბრუნება</button>
     </div>` });
 
         this.modalService.openModal();
+        this.form.reset();
+        this.selectedFile = null;
+        this.fileName = null;
+        this.fileInput!.nativeElement.value = null;
+        this.selectedOptions = [];
       },
       (error) => {
         console.log(error);
@@ -130,9 +132,9 @@ export class CreateBlogComponent implements OnInit {
 
   twoWordsValidator(control: AbstractControl): ValidationErrors | null {
     const value: string = control.value;
-    const words = value.split(/\s+/).filter(word => word.trim().length > 0);
+    const words = value?.split(/\s+/).filter(word => word.trim().length > 0);
 
-    return words.length >= 2 ? null : { twoWordsValidation: true };
+    return words?.length >= 2 ? null : { twoWordsValidation: true };
   }
 
   customEmailValidator(control: AbstractControl): ValidationErrors | null {
