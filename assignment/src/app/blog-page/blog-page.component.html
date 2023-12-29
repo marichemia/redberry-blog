@@ -1,0 +1,13 @@
+<div class="container" *ngIf="displayedBlog$ | async as blog">
+    <img [src]="blog.image" alt="image">
+    <div class="author">{{blog.author}}</div>
+    <div class="date">{{blog.publish_date}}</div>
+    <h1 class="title">{{blog.title}}</h1>
+    <div class="categories">
+        <div class="category" *ngFor="let category of blog.categories"
+            [style.background-color]="category.background_color" [style.color]="category.text_color">
+            {{category.title}}
+        </div>
+    </div>
+    <div class="description">{{blog.description}}</div>
+</div>

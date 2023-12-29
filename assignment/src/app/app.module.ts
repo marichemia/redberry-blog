@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './shared/components/modal/modal.component';
+import { BlogPageComponent } from './blog-page/blog-page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ModalComponent } from './shared/components/modal/modal.component';
     CategoriesComponent,
     HomeComponent,
     CreateBlogComponent,
-    ModalComponent
+    ModalComponent,
+    BlogPageComponent
   ],
   imports: [
     BrowserModule,

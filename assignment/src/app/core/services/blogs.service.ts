@@ -11,6 +11,10 @@ export class BlogsService {
 
   constructor(private http: HttpClient) { }
 
+  getOne(id: any): Observable<Blog> {
+    return this.http.get<Blog>(`https://api.blog.redberryinternship.ge/api/blogs/${id}`);
+  }
+
   getAll(categories?: string[]): Observable<Blog[]> {
     return this.http.get<AllBlogsRes>('https://api.blog.redberryinternship.ge/api/blogs')
       .pipe(
@@ -20,6 +24,7 @@ export class BlogsService {
 
   private filterBlogs(blogs: Blog[], categories?: string[]): Blog[] {
     const currentDate = new Date().toISOString().split('T')[0];
+
 
     return blogs
       .filter(blog => blog.publish_date <= currentDate)
